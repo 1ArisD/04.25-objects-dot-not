@@ -1,28 +1,39 @@
 const topicElement = document.querySelector(".topic");
 const countElement = document.querySelector(".count");
+const body = document.querySelector("body");
+const success = document.querySelector(".success");
+const dance = document.querySelector(".dance");
 
-const learning = {};
+const learning = {
+  topic: "JS",
+  learningGoals: [
+    "Understand programming fundamentals",
+    "Have Fun",
+    "Build JS programs",
+  ],
+  category: "Front End Development",
+  topicImportance: "high",
+  hoursThisWeek: 2,
+  weeklyHourGoal: 7,
+  achievedStudyGoal: "false",
+  addStudyTime: function (hours) {
+    this.hoursThisWeek += hours;
+    if (this.hoursThisWeek >= this.weeklyHourGoal) {
+      this.achievedStudyGoal = true;
+      this.celebrate();
+    }
+  },
+  celebrate: function () {
+    body.classList.add("celebrate");
+    success.classList.remove("hide");
+    dance.classList.remove("hide");
+  },
+};
 
-learning.topic = "JS";
-learning.learningGoals = [
-  "Build JS Programs",
-  "Attend a Hackathon",
-  "Become Proficient in Python",
-  "Start a Coding Blog",
-];
-learning.category = "Front End Development";
-learning.topicImportance = "High";
+topicElement.innerText = `✔️ I'm learning ${learning.topic}.`;
+countElement.innerText = `✔️ I have ${learning.learningGoals.length} learning goals.`;
 
-console.log(learning);
-
-learning.topic = "JavaScript";
-
-learning.learningGoals.splice(1, 1);
-
-console.log(learning);
-
-topicElement.innerText = `I'm learning ${learning.topic}.`;
 topicElement.classList.remove("hide");
-
-countElement.innerText = `I have ${learning.learningGoals.length} learning goals.`;
 countElement.classList.remove("hide");
+
+learning.addStudyTime(8);
